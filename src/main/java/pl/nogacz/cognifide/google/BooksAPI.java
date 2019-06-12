@@ -15,7 +15,12 @@ public class BooksAPI {
         String json = null;
 
         do {
-            json = restTemplate.getForObject(queryUrl, String.class);
+            try {
+                json = restTemplate.getForObject(queryUrl, String.class);
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+                json = null;
+            }
         } while(json == null);
 
         return json;

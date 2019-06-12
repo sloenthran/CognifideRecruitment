@@ -1,10 +1,7 @@
 package pl.nogacz.cognifide.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.nogacz.cognifide.google.BooksAPI;
 
 /**
@@ -17,12 +14,7 @@ public class BookDetailsController {
     private BooksAPI booksAPI;
 
     @RequestMapping(value = "/book/{id}")
-    public void getCategory(@RequestParam("id") String id) throws Exception {
-
-    }
-
-    @RequestMapping(value = "/book/{id}")
-    public void getCategory(@RequestParam("id") int id) throws Exception {
-
+    public void getCategory(@PathVariable("id") String id) throws Exception {
+        System.out.println(booksAPI.getBooks());
     }
 }
