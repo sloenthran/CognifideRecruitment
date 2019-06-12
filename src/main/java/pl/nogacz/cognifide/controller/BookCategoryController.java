@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @CrossOrigin(origins = "*")
-public class BookDetailsController {
-    @RequestMapping(value = "/book/{id}")
-    public void getCategory(@RequestParam("id") String id) throws Exception {
+public class BookCategoryController {
+    @RequestMapping(value = "/bookCategory/{category}")
+    public void getCategory(@RequestParam("category") String category) throws Exception {
 
     }
 }
