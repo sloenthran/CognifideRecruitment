@@ -11,12 +11,12 @@ public class VolumeInfo {
     private String publisher;
     private String publishedDate;
     private String description;
-    private int pageCount;
+    private Integer pageCount;
     private List<IndustryIdentifiers> industryIdentifiers;
     private ImageLinks imageLinks;
     private String language;
     private String previewLink;
-    private double averageRating;
+    private Double averageRating;
     private List<String> authors;
     private List<String> categories;
 
@@ -60,11 +60,11 @@ public class VolumeInfo {
         this.description = description;
     }
 
-    public int getPageCount() {
+    public Integer getPageCount() {
         return pageCount;
     }
 
-    public void setPageCount(int pageCount) {
+    public void setPageCount(Integer pageCount) {
         this.pageCount = pageCount;
     }
 
@@ -100,11 +100,11 @@ public class VolumeInfo {
         this.previewLink = previewLink;
     }
 
-    public double getAverageRating() {
+    public Double getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(double averageRating) {
+    public void setAverageRating(Double averageRating) {
         this.averageRating = averageRating;
     }
 

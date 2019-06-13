@@ -39,7 +39,7 @@ public class BookJson {
 
             VolumeInfo volumeInfo = item.getVolumeInfo();
 
-            long publishedDate = 0;
+            Long publishedDate = null;
 
             if(volumeInfo.getPublishedDate() != null) {
                 publishedDate = dateToLong.convert(volumeInfo.getPublishedDate());

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import pl.nogacz.cognifide.google.BooksAPI;
 import pl.nogacz.cognifide.library.json.map.BookJson;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,5 +47,19 @@ public class Library {
         }
 
         return null;
+    }
+
+    public Set<Book> getBooksFromCategory(String category) {
+        Set<Book> bookSet = new HashSet<>();
+
+        for(Book book : books) {
+            if(book.getCategories() != null) {
+                if(book.getCategories().contains(category)) {
+                    bookSet.add(book);
+                }
+            }
+        }
+
+        return bookSet;
     }
 }

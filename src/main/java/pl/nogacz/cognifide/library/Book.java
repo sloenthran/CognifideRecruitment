@@ -10,13 +10,13 @@ public class Book {
     private String title;
     private String subtitle;
     private String publisher;
-    private long publishedDate;
+    private Long publishedDate;
     private String description;
-    private int pageCount;
+    private Integer pageCount;
     private String thumbnailUrl;
     private String language;
     private String previewLink;
-    private double averageRating;
+    private Double averageRating;
     private List<String> authors;
     private List<String> categories;
 
@@ -68,11 +68,11 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public long getPublishedDate() {
+    public Long getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(long publishedDate) {
+    public void setPublishedDate(Long publishedDate) {
         this.publishedDate = publishedDate;
     }
 
@@ -84,11 +84,11 @@ public class Book {
         this.description = description;
     }
 
-    public int getPageCount() {
+    public Integer getPageCount() {
         return pageCount;
     }
 
-    public void setPageCount(int pageCount) {
+    public void setPageCount(Integer pageCount) {
         this.pageCount = pageCount;
     }
 
@@ -116,11 +116,11 @@ public class Book {
         this.previewLink = previewLink;
     }
 
-    public double getAverageRating() {
+    public Double getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(double averageRating) {
+    public void setAverageRating(Double averageRating) {
         this.averageRating = averageRating;
     }
 
@@ -158,13 +158,13 @@ public class Book {
         private String title;
         private String subtitle;
         private String publisher;
-        private long publishedDate;
+        private Long publishedDate;
         private String description;
-        private int pageCount;
+        private Integer pageCount;
         private String thumbnailUrl;
         private String language;
         private String previewLink;
-        private double averageRating;
+        private Double averageRating;
         private List<String> authors;
         private List<String> categories;
 
@@ -188,7 +188,7 @@ public class Book {
             return this;
         }
 
-        public Builder publishedDate(long publishedDate) {
+        public Builder publishedDate(Long publishedDate) {
             this.publishedDate = publishedDate;
             return this;
         }
@@ -198,7 +198,7 @@ public class Book {
             return this;
         }
 
-        public Builder pageCount(int pageCount) {
+        public Builder pageCount(Integer pageCount) {
             this.pageCount = pageCount;
             return this;
         }
@@ -218,7 +218,7 @@ public class Book {
             return this;
         }
 
-        public Builder averageRating(double averageRating) {
+        public Builder averageRating(Double averageRating) {
             this.averageRating = averageRating;
             return this;
         }
