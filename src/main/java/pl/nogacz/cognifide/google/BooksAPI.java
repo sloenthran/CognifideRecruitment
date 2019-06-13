@@ -14,6 +14,7 @@ public class BooksAPI {
         String queryUrl = "https://www.googleapis.com/books/v1/volumes?q=java&maxResults=40";
         String json = null;
 
+        //I used here the do-while loop because I did not generate the key and the Google API sometimes throws 503 error on me
         do {
             try {
                 json = restTemplate.getForObject(queryUrl, String.class);
