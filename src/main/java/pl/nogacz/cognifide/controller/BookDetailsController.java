@@ -15,7 +15,7 @@ import pl.nogacz.cognifide.library.Library;
 @CrossOrigin(origins = "*")
 public class BookDetailsController {
     @RequestMapping(value = "/book/{id}", produces = "application/json")
-    public ResponseEntity<?> getCategory(@PathVariable("id") String id) throws Exception {
+    public ResponseEntity<String> getCategory(@PathVariable("id") String id) {
         Book book = Library.getInstance().getBook(id);
 
         if(book != null) {

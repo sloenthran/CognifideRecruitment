@@ -20,10 +20,10 @@ import java.util.Set;
 @CrossOrigin(origins = "*")
 public class BookCategoryController {
     @RequestMapping(value = "/bookCategory/{category}", produces = "application/json")
-    public ResponseEntity<?> getCategory(@PathVariable("category") String category) throws Exception {
+    public ResponseEntity<String> getCategory(@PathVariable("category") String category) {
         Set<Book> bookSet = Library.getInstance().getBooksFromCategory(category);
 
-        if(bookSet.size() > 0) {
+        if(!bookSet.isEmpty()) {
             return new ResponseEntity<>(new Gson().toJson(bookSet), HttpStatus.OK);
         } else {
             throw new ResponseStatusException(

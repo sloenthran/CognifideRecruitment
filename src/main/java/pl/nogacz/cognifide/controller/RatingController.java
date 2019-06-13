@@ -17,7 +17,7 @@ import pl.nogacz.cognifide.library.dto.RatingDTO;
 @CrossOrigin(origins = "*")
 public class RatingController {
     @RequestMapping(value = "/rating", produces = "application/json")
-    public ResponseEntity<?> getRating() {
+    public ResponseEntity<String> getRating() {
         RatingDTO rating = Library.getInstance().getRating();
 
         if(rating != null) {

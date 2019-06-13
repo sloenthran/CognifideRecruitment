@@ -20,11 +20,9 @@ public class Library {
     }
 
     public static Library getInstance() {
-        if(instance == null) {
-            synchronized(Library.class) {
-                if(instance == null) {
-                    instance = new Library();
-                }
+        synchronized(Library.class) {
+            if(instance == null) {
+                instance = new Library();
             }
         }
 
@@ -53,10 +51,8 @@ public class Library {
         Set<Book> bookSet = new HashSet<>();
 
         for(Book book : books) {
-            if(book.getCategories() != null) {
-                if(book.getCategories().contains(category)) {
-                    bookSet.add(book);
-                }
+            if(book.getCategories() != null && book.getCategories().contains(category)) {
+               bookSet.add(book);
             }
         }
 
