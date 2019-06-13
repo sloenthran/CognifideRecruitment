@@ -88,4 +88,16 @@ public class Library {
 
         return rating;
     }
+
+    public Set<String> getCategory() {
+        Set<String> category = new HashSet<>();
+
+        for(Book book : books) {
+            if(book.getCategories() != null && !book.getCategories().isEmpty()) {
+                category.addAll(book.getCategories());
+            }
+        }
+
+        return category;
+    }
 }

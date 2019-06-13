@@ -20,11 +20,24 @@ import java.util.Set;
 @CrossOrigin(origins = "*")
 public class BookCategoryController {
     @RequestMapping(value = "/bookCategory/{category}", produces = "application/json")
-    public ResponseEntity<String> getCategory(@PathVariable("category") String category) {
+    public ResponseEntity<String> getBooksFromCategory(@PathVariable("category") String category) {
         Set<Book> bookSet = Library.getInstance().getBooksFromCategory(category);
 
         if(!bookSet.isEmpty()) {
             return new ResponseEntity<>(new Gson().toJson(bookSet), HttpStatus.OK);
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Category not found!"
+            );
+        }
+    }
+
+    @RequestMapping(value = "/getCategory", produces = "application/json")
+    public ResponseEntity<String> getCategory() {
+        Set<String> category = Library.getInstance().getCategory();
+
+        if(!category.isEmpty()) {
+            return new ResponseEntity<>(new Gson().toJson(category), HttpStatus.OK);
         } else {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Category not found!"
