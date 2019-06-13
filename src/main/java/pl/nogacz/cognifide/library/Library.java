@@ -5,8 +5,7 @@ import pl.nogacz.cognifide.google.BooksAPI;
 import pl.nogacz.cognifide.library.dto.RatingDTO;
 import pl.nogacz.cognifide.library.json.map.BookJson;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Dawid Nogacz on 12.06.2019
@@ -59,7 +58,34 @@ public class Library {
         return bookSet;
     }
 
-    public RatingDTO getRating() {
-        return null; //TODO
+    public List<RatingDTO> getRating() {
+        Set<String> authors = new HashSet<>();
+
+        for(Book book : books) {
+            if(book.getAuthors() != null) {
+                authors.addAll(book.getAuthors());
+            }
+        }
+
+        List<RatingDTO> rating = new ArrayList<>();
+
+        for(String author : authors) {
+            int count = 0;
+            double average = 0;
+            for(Book book : books) {
+                if(book.getAverageRating() != null && book.getAuthors() != null && book.getAuthors().contains(author)) {
+                    count++;
+                    average += book.getAverageRating();
+                }
+            }
+
+            if(count > 0) {
+                rating.add(new RatingDTO(author, average / count));
+            }
+        }
+
+        Collections.sort(rating);
+
+        return rating;
     }
 }

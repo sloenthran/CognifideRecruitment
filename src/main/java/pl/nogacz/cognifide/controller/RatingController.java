@@ -10,6 +10,8 @@ import org.springframework.web.server.ResponseStatusException;
 import pl.nogacz.cognifide.library.Library;
 import pl.nogacz.cognifide.library.dto.RatingDTO;
 
+import java.util.List;
+
 /**
  * @author Dawid Nogacz on 12.06.2019
  */
@@ -18,7 +20,7 @@ import pl.nogacz.cognifide.library.dto.RatingDTO;
 public class RatingController {
     @RequestMapping(value = "/rating", produces = "application/json")
     public ResponseEntity<String> getRating() {
-        RatingDTO rating = Library.getInstance().getRating();
+        List<RatingDTO> rating = Library.getInstance().getRating();
 
         if(rating != null) {
             return new ResponseEntity<>(new Gson().toJson(rating), HttpStatus.OK);

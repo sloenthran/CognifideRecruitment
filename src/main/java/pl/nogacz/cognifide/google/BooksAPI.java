@@ -18,7 +18,6 @@ public class BooksAPI {
             try {
                 json = restTemplate.getForObject(queryUrl, String.class);
             } catch(Exception e) {
-                System.out.println("[GoogleAPI] " + e.getMessage());
                 json = null;
             }
         } while(json == null);
