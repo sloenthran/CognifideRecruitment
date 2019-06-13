@@ -37,4 +37,14 @@ public class Library {
         BookJson bookJson = gson.fromJson(booksAPI.getBooks(), BookJson.class);
         books = new HashSet<>(bookJson.getBooks());
     }
+
+    public Book getBook(String isbn) {
+        for(Book book : books) {
+            if(book.getIsbn().contains(isbn)) {
+                return book;
+            }
+        }
+
+        return null;
+    }
 }

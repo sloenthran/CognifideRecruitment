@@ -6,7 +6,6 @@ import java.util.*;
  * @author Dawid Nogacz on 12.06.2019
  */
 public class Book {
-    private String id;
     private String isbn;
     private String title;
     private String subtitle;
@@ -22,7 +21,6 @@ public class Book {
     private List<String> categories;
 
     public Book(Builder builder) {
-        this.id = builder.id;
         this.isbn = builder.isbn;
         this.title = builder.title;
         this.subtitle = builder.subtitle;
@@ -36,14 +34,6 @@ public class Book {
         this.averageRating = builder.averageRating;
         this.authors = builder.authors;
         this.categories = builder.categories;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getIsbn() {
@@ -155,17 +145,15 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(id, book.id) &&
-                Objects.equals(isbn, book.isbn);
+        return Objects.equals(isbn, book.isbn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isbn);
+        return Objects.hash(isbn);
     }
 
     public static class Builder {
-        private String id;
         private String isbn;
         private String title;
         private String subtitle;
@@ -179,11 +167,6 @@ public class Book {
         private double averageRating;
         private List<String> authors;
         private List<String> categories;
-
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
 
         public Builder isbn(String isbn) {
             this.isbn = isbn;

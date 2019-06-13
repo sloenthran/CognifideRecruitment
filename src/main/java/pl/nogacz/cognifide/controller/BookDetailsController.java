@@ -1,6 +1,10 @@
 package pl.nogacz.cognifide.controller;
 
+import com.google.gson.Gson;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import pl.nogacz.cognifide.library.Book;
 import pl.nogacz.cognifide.library.Library;
 
 /**
@@ -10,7 +14,15 @@ import pl.nogacz.cognifide.library.Library;
 @CrossOrigin(origins = "*")
 public class BookDetailsController {
     @RequestMapping(value = "/book/{id}")
-    public void getCategory(@PathVariable("id") String id) throws Exception {
-        Library.getInstance();
+    public String getCategory(@PathVariable("id") String id) throws Exception {
+        Book book = Library.getInstance().getBook(id);
+
+        if(book != null) {
+            return new Gson().toJson(book);
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Wrong ID!"
+            );
+        }
     }
 }

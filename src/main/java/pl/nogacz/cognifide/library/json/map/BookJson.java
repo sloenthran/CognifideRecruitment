@@ -33,6 +33,10 @@ public class BookJson {
                     .limit(1)
                     .collect(Collectors.joining());
 
+            if(isbn == null || isbn.isEmpty()) {
+                isbn = item.getId();
+            }
+
             VolumeInfo volumeInfo = item.getVolumeInfo();
 
             long publishedDate = 0;
@@ -43,7 +47,6 @@ public class BookJson {
 
             Book book = new Book
                     .Builder()
-                    .id(item.getId())
                     .isbn(isbn)
                     .title(volumeInfo.getTitle())
                     .subtitle(volumeInfo.getSubtitle())
