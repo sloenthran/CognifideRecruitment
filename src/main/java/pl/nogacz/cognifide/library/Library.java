@@ -6,7 +6,6 @@ import pl.nogacz.cognifide.library.dto.RatingDTO;
 import pl.nogacz.cognifide.library.json.map.BookJson;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
