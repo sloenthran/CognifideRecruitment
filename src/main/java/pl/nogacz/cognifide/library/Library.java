@@ -2,10 +2,11 @@ package pl.nogacz.cognifide.library;
 
 import com.google.gson.Gson;
 import pl.nogacz.cognifide.google.BooksAPI;
+import pl.nogacz.cognifide.library.dto.RatingDTO;
 import pl.nogacz.cognifide.library.json.map.BookJson;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -61,5 +62,9 @@ public class Library {
         }
 
         return bookSet;
+    }
+
+    public RatingDTO getRating() {
+        return null; //TODO
     }
 }

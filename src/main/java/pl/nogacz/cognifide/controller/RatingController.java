@@ -1,8 +1,13 @@
 package pl.nogacz.cognifide.controller;
 
+import com.google.gson.Gson;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+import pl.nogacz.cognifide.library.Library;
+import pl.nogacz.cognifide.library.dto.RatingDTO;
 
 /**
  * @author Dawid Nogacz on 12.06.2019
@@ -11,7 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 public class RatingController {
     @RequestMapping(value = "/rating")
-    public void getRating() {
+    public String getRating() {
+        RatingDTO rating = Library.getInstance().getRating();
 
+        if(rating != null) {
+            return new Gson().toJson(rating);
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Rating is null!"
+            );
+        }
     }
 }
