@@ -1,4 +1,4 @@
-# CognifideRecruitment
+# CognifideRecruitment [![Build Status](https://travis-ci.org/sloenthran/CognifideRecruitment.svg?branch=master)](https://travis-ci.org/sloenthran/CognifideRecruitment)
 A REST API application that retrieves from Google Books API and provides methods for retrieving information about books.
 
 ## Application framework
