@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import pl.nogacz.cognifide.library.Library;
@@ -18,11 +18,11 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 public class RatingController {
-    @RequestMapping(value = "/rating", produces = "application/json")
+    @GetMapping(value = "/rating", produces = "application/json")
     public ResponseEntity<String> getRating() {
         List<RatingDTO> rating = Library.getInstance().getRating();
 
-        if(rating != null) {
+        if(!rating.isEmpty()) {
             return new ResponseEntity<>(new Gson().toJson(rating), HttpStatus.OK);
         } else {
             throw new ResponseStatusException(

@@ -13,6 +13,7 @@ import java.util.*;
 public class Library {
     private static Library instance = null;
     private Set<Book> books;
+    private Gson gson = new Gson();
 
     private Library() {
         updateLibrary();
@@ -44,6 +45,10 @@ public class Library {
         }
 
         return null;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
     }
 
     public Set<Book> getBooksFromCategory(String category) {

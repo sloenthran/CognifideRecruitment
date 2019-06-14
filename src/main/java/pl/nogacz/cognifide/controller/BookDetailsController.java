@@ -8,14 +8,16 @@ import org.springframework.web.server.ResponseStatusException;
 import pl.nogacz.cognifide.library.Book;
 import pl.nogacz.cognifide.library.Library;
 
+import java.util.Set;
+
 /**
  * @author Dawid Nogacz on 12.06.2019
  */
 @RestController
 @CrossOrigin(origins = "*")
 public class BookDetailsController {
-    @RequestMapping(value = "/book/{id}", produces = "application/json")
-    public ResponseEntity<String> getCategory(@PathVariable("id") String id) {
+    @GetMapping(value = "/book/{id}", produces = "application/json")
+    public ResponseEntity<String> getBook(@PathVariable("id") String id) {
         Book book = Library.getInstance().getBook(id);
 
         if(book != null) {
@@ -23,6 +25,19 @@ public class BookDetailsController {
         } else {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Wrong ID!"
+            );
+        }
+    }
+
+    @GetMapping(value = "/books", produces = "application/json")
+    public ResponseEntity<String> getBooks() {
+        Set<Book> books = Library.getInstance().getBooks();
+
+        if(!books.isEmpty()) {
+            return new ResponseEntity<>(new Gson().toJson(books), HttpStatus.OK);
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Library don't have any book!"
             );
         }
     }
