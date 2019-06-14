@@ -16,7 +16,7 @@ import java.util.Set;
 @RestController
 @CrossOrigin(origins = "*")
 public class BookCategoryController {
-    @GetMapping(value = "/bookCategory/{category}", produces = "application/json")
+    @GetMapping(value = "/getBookFromCategory/{category}", produces = "application/json")
     public ResponseEntity<String> getBooksFromCategory(@PathVariable("category") String category) {
         Set<Book> bookSet = Library.getInstance().getBooksFromCategory(category);
 

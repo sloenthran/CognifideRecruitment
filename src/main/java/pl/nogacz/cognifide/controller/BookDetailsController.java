@@ -16,7 +16,7 @@ import java.util.Set;
 @RestController
 @CrossOrigin(origins = "*")
 public class BookDetailsController {
-    @GetMapping(value = "/book/{id}", produces = "application/json")
+    @GetMapping(value = "/getBook/{id}", produces = "application/json")
     public ResponseEntity<String> getBook(@PathVariable("id") String id) {
         Book book = Library.getInstance().getBook(id);
 
@@ -29,7 +29,7 @@ public class BookDetailsController {
         }
     }
 
-    @GetMapping(value = "/books", produces = "application/json")
+    @GetMapping(value = "/getBooks", produces = "application/json")
     public ResponseEntity<String> getBooks() {
         Set<Book> books = Library.getInstance().getBooks();
 
