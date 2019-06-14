@@ -18,6 +18,7 @@ public class CognifideApplication {
     @Bean
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2).select()
-                .apis(RequestHandlerSelectors.basePackage("pl.nogacz.cognifide.controller")).build();
+                .apis(RequestHandlerSelectors.basePackage("pl.nogacz.cognifide.controller"))
+                .build();
     }
 }
