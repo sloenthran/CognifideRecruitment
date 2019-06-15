@@ -9,9 +9,12 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.nogacz.cognifide.library.Book;
 import pl.nogacz.cognifide.library.Library;
@@ -25,33 +28,31 @@ import static org.junit.Assert.*;
 /**
  * @author Dawid Nogacz on 14.06.2019
  */
-@RunWith(PowerMockRunner.class)
-@PowerMockRunnerDelegate(SpringRunner.class)
-@PowerMockIgnore({"javax.management.*"})
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@PrepareForTest(Library.class)
+@ActiveProfiles("LibraryMock")
 public class BookDetailsControllerTest {
     @LocalServerPort
     private int port;
 
     private static final String LOCALHOST = "http://localhost:";
 
-    private TestRestTemplate restTemplate = new TestRestTemplate();
+    @Autowired
+    private Library library;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
 
     @Test
     public void getBook() {
         //Given
-        PowerMockito.mockStatic(Library.class);
-        Library library = Mockito.mock(Library.class);
-
         Book book = new Book.Builder()
                 .isbn("123")
                 .language("pl")
                 .build();
 
         //When
-        PowerMockito.when(Library.getInstance()).thenReturn(library);
-        PowerMockito.when(Library.getInstance().getBook("123")).thenReturn(book);
+        Mockito.when(library.getBook("123")).thenReturn(book);
 
         //Then
         assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getBook/123", String.class))
@@ -61,12 +62,9 @@ public class BookDetailsControllerTest {
     @Test
     public void getEmptyBook() {
         //Given
-        PowerMockito.mockStatic(Library.class);
-        Library library = Mockito.mock(Library.class);
 
         //When
-        PowerMockito.when(Library.getInstance()).thenReturn(library);
-        PowerMockito.when(Library.getInstance().getBook("123")).thenReturn(null);
+        Mockito.when(library.getBook("123")).thenReturn(null);
 
         //Then
         assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getBook/123", String.class))
@@ -76,9 +74,6 @@ public class BookDetailsControllerTest {
     @Test
     public void getBooks() {
         //Given
-        PowerMockito.mockStatic(Library.class);
-        Library library = Mockito.mock(Library.class);
-
         Set<Book> bookSet = new HashSet<>();
 
         bookSet.add(new Book
@@ -94,8 +89,7 @@ public class BookDetailsControllerTest {
                 .build());
 
         //When
-        PowerMockito.when(Library.getInstance()).thenReturn(library);
-        PowerMockito.when(Library.getInstance().getBooks()).thenReturn(bookSet);
+        Mockito.when(library.getBooks()).thenReturn(bookSet);
 
         //Then
         assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getBooks", String.class))
@@ -105,14 +99,10 @@ public class BookDetailsControllerTest {
     @Test
     public void getEmptyBooks() {
         //Given
-        PowerMockito.mockStatic(Library.class);
-        Library library = Mockito.mock(Library.class);
-
         Set<Book> bookSet = new HashSet<>();
 
         //When
-        PowerMockito.when(Library.getInstance()).thenReturn(library);
-        PowerMockito.when(Library.getInstance().getBooks()).thenReturn(bookSet);
+        Mockito.when(library.getBooks()).thenReturn(bookSet);
 
         //Then
         assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getBooks", String.class))
