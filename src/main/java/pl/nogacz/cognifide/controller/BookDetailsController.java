@@ -1,6 +1,7 @@
 package pl.nogacz.cognifide.controller;
 
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,12 @@ import java.util.Set;
 @RestController
 @CrossOrigin(origins = "*")
 public class BookDetailsController {
+    @Autowired
+    private Library library;
+
     @GetMapping(value = "/getBook/{id}", produces = "application/json")
     public ResponseEntity<String> getBook(@PathVariable("id") String id) {
-        Book book = Library.getInstance().getBook(id);
+        Book book = library.getBook(id);
 
         if(book != null) {
             return new ResponseEntity<>(new Gson().toJson(book), HttpStatus.OK);
@@ -31,7 +35,7 @@ public class BookDetailsController {
 
     @GetMapping(value = "/getBooks", produces = "application/json")
     public ResponseEntity<String> getBooks() {
-        Set<Book> books = Library.getInstance().getBooks();
+        Set<Book> books = library.getBooks();
 
         if(!books.isEmpty()) {
             return new ResponseEntity<>(new Gson().toJson(books), HttpStatus.OK);

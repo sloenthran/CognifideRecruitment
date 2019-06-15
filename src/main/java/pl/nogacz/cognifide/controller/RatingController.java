@@ -1,6 +1,7 @@
 package pl.nogacz.cognifide.controller;
 
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,9 +19,12 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 public class RatingController {
+    @Autowired
+    private Library library;
+
     @GetMapping(value = "/rating", produces = "application/json")
     public ResponseEntity<String> getRating() {
-        List<RatingDTO> rating = Library.getInstance().getRating();
+        List<RatingDTO> rating = library.getRating();
 
         if(!rating.isEmpty()) {
             return new ResponseEntity<>(new Gson().toJson(rating), HttpStatus.OK);

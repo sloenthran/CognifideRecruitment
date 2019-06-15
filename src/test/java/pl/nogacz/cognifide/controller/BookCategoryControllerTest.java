@@ -9,9 +9,12 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.nogacz.cognifide.library.Book;
 import pl.nogacz.cognifide.library.Library;
@@ -25,25 +28,24 @@ import static org.junit.Assert.*;
 /**
  * @author Dawid Nogacz on 14.06.2019
  */
-@RunWith(PowerMockRunner.class)
-@PowerMockRunnerDelegate(SpringRunner.class)
-@PowerMockIgnore({"javax.management.*"})
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@PrepareForTest(Library.class)
+@ActiveProfiles("LibraryMock")
 public class BookCategoryControllerTest {
     @LocalServerPort
     private int port;
 
     private static final String LOCALHOST = "http://localhost:";
 
-    private TestRestTemplate restTemplate = new TestRestTemplate();
+    @Autowired
+    private Library library;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
 
     @Test
     public void getBooksFromCategory() {
         //Given
-        PowerMockito.mockStatic(Library.class);
-        Library library = Mockito.mock(Library.class);
-
         Set<Book> bookSet = new HashSet<>();
 
         bookSet.add(new Book
@@ -59,8 +61,7 @@ public class BookCategoryControllerTest {
                 .build());
 
         //When
-        PowerMockito.when(Library.getInstance()).thenReturn(library);
-        PowerMockito.when(Library.getInstance().getBooksFromCategory("test")).thenReturn(bookSet);
+        Mockito.when(library.getBooksFromCategory("test")).thenReturn(bookSet);
 
         //Then
         assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getBookFromCategory/test", String.class))
@@ -70,14 +71,10 @@ public class BookCategoryControllerTest {
     @Test
     public void getEmptyBooksFromCategory() {
         //Given
-        PowerMockito.mockStatic(Library.class);
-        Library library = Mockito.mock(Library.class);
-
         Set<Book> bookSet = new HashSet<>();
 
         //When
-        PowerMockito.when(Library.getInstance()).thenReturn(library);
-        PowerMockito.when(Library.getInstance().getBooksFromCategory("test")).thenReturn(bookSet);
+        Mockito.when(library.getBooksFromCategory("test")).thenReturn(bookSet);
 
         //Then
         assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getBookFromCategory/test", String.class))
@@ -87,9 +84,6 @@ public class BookCategoryControllerTest {
     @Test
     public void getCategory() {
         //Given
-        PowerMockito.mockStatic(Library.class);
-        Library library = Mockito.mock(Library.class);
-
         Set<String> category = new HashSet<>();
 
         category.add("a");
@@ -97,8 +91,7 @@ public class BookCategoryControllerTest {
         category.add("c");
 
         //When
-        PowerMockito.when(Library.getInstance()).thenReturn(library);
-        PowerMockito.when(Library.getInstance().getCategory()).thenReturn(category);
+        Mockito.when(library.getCategory()).thenReturn(category);
 
         //Then
         assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getCategory", String.class))
@@ -108,14 +101,10 @@ public class BookCategoryControllerTest {
     @Test
     public void getEmptyCategory() {
         //Given
-        PowerMockito.mockStatic(Library.class);
-        Library library = Mockito.mock(Library.class);
-
         Set<String> category = new HashSet<>();
 
         //When
-        PowerMockito.when(Library.getInstance()).thenReturn(library);
-        PowerMockito.when(Library.getInstance().getCategory()).thenReturn(category);
+        Mockito.when(library.getCategory()).thenReturn(category);
 
         //Then
         assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getCategory", String.class))

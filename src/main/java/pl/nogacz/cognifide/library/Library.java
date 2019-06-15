@@ -1,6 +1,8 @@
 package pl.nogacz.cognifide.library;
 
 import com.google.gson.Gson;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import pl.nogacz.cognifide.google.BooksAPI;
 import pl.nogacz.cognifide.library.dto.RatingDTO;
 import pl.nogacz.cognifide.library.json.map.BookJson;
@@ -10,23 +12,12 @@ import java.util.*;
 /**
  * @author Dawid Nogacz on 12.06.2019
  */
+@Component
 public class Library {
-    private static Library instance = null;
     private Set<Book> books;
-    private Gson gson = new Gson();
 
-    private Library() {
+    public Library() {
         updateLibrary();
-    }
-
-    public static Library getInstance() {
-        synchronized(Library.class) {
-            if(instance == null) {
-                instance = new Library();
-            }
-        }
-
-        return instance;
     }
 
     private void updateLibrary() {
