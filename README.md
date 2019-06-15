@@ -13,8 +13,6 @@ jUnit4
 
 Mockito
 
-PowerMockito - because i used Singleton pattern in Library class and I need static mock
-
 ## Design Patterns
 Singleton - to the Library class because you do not need to load a list of books to memory from Google API every time
 
