@@ -36,6 +36,9 @@ public class RatingControllerTest {
     @Autowired
     private Library library;
 
+    @Autowired
+    private Gson gson;
+
     @Test
     public void getRating() {
         //Given
@@ -47,7 +50,7 @@ public class RatingControllerTest {
 
         //Then
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/rating", String.class))
-                .contains(new Gson().toJson(new RatingDTO("author", 1.0)));
+                .contains(gson.toJson(new RatingDTO("author", 1.0)));
     }
 
     @Test

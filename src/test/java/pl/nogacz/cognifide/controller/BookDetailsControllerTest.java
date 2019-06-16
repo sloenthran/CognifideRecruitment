@@ -36,6 +36,9 @@ public class BookDetailsControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private Gson gson;
+
     @Test
     public void getBook() {
         //Given
@@ -48,8 +51,8 @@ public class BookDetailsControllerTest {
         Mockito.when(library.getBook("123")).thenReturn(book);
 
         //Then
-        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getBook/123", String.class))
-                .contains(new Gson().toJson(book));
+        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/book/123", String.class))
+                .contains(gson.toJson(book));
     }
 
     @Test
@@ -60,7 +63,7 @@ public class BookDetailsControllerTest {
         Mockito.when(library.getBook("123")).thenReturn(null);
 
         //Then
-        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getBook/123", String.class))
+        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/book/123", String.class))
                 .contains("\"status\":404");
     }
 
@@ -85,8 +88,8 @@ public class BookDetailsControllerTest {
         Mockito.when(library.getBooks()).thenReturn(bookSet);
 
         //Then
-        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getBooks", String.class))
-                .contains(new Gson().toJson(bookSet));
+        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/books", String.class))
+                .contains(gson.toJson(bookSet));
     }
 
     @Test
@@ -98,7 +101,7 @@ public class BookDetailsControllerTest {
         Mockito.when(library.getBooks()).thenReturn(bookSet);
 
         //Then
-        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getBooks", String.class))
+        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/books", String.class))
                 .contains("\"status\":404");
     }
 }
