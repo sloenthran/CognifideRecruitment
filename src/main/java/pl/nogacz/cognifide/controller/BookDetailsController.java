@@ -20,12 +20,15 @@ public class BookDetailsController {
     @Autowired
     private Library library;
 
+    @Autowired
+    private Gson gson;
+
     @GetMapping(value = "/book/{id}", produces = "application/json")
     public ResponseEntity<String> getBook(@PathVariable("id") String id) {
         Book book = library.getBook(id);
 
         if(book != null) {
-            return new ResponseEntity<>(new Gson().toJson(book), HttpStatus.OK);
+            return new ResponseEntity<>(gson.toJson(book), HttpStatus.OK);
         } else {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Wrong ID!"
@@ -38,7 +41,7 @@ public class BookDetailsController {
         Set<Book> books = library.getBooks();
 
         if(!books.isEmpty()) {
-            return new ResponseEntity<>(new Gson().toJson(books), HttpStatus.OK);
+            return new ResponseEntity<>(gson.toJson(books), HttpStatus.OK);
         } else {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Library don't have any book!"

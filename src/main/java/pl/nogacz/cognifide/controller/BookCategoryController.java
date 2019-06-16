@@ -20,12 +20,15 @@ public class BookCategoryController {
     @Autowired
     private Library library;
 
+    @Autowired
+    private Gson gson;
+
     @GetMapping(value = "/bookFromCategory/{category}", produces = "application/json")
     public ResponseEntity<String> getBooksFromCategory(@PathVariable("category") String category) {
         Set<Book> bookSet = library.getBooksFromCategory(category);
 
         if(!bookSet.isEmpty()) {
-            return new ResponseEntity<>(new Gson().toJson(bookSet), HttpStatus.OK);
+            return new ResponseEntity<>(gson.toJson(bookSet), HttpStatus.OK);
         } else {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Category not found!"
@@ -38,7 +41,7 @@ public class BookCategoryController {
         Set<String> category = library.getCategory();
 
         if(!category.isEmpty()) {
-            return new ResponseEntity<>(new Gson().toJson(category), HttpStatus.OK);
+            return new ResponseEntity<>(gson.toJson(category), HttpStatus.OK);
         } else {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Category not found!"

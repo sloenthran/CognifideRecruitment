@@ -22,12 +22,15 @@ public class RatingController {
     @Autowired
     private Library library;
 
+    @Autowired
+    private Gson gson;
+
     @GetMapping(value = "/rating", produces = "application/json")
     public ResponseEntity<String> getRating() {
         List<RatingDTO> rating = library.getRating();
 
         if(!rating.isEmpty()) {
-            return new ResponseEntity<>(new Gson().toJson(rating), HttpStatus.OK);
+            return new ResponseEntity<>(gson.toJson(rating), HttpStatus.OK);
         } else {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Rating is null!"
