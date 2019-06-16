@@ -34,7 +34,7 @@ public class DateToLong {
             Date date = dateFormat.parse(string);
             returnDate = date.getTime() / 1000;
         } catch(Exception e) {
-            System.out.println("[DateToLong] " + e.getMessage());
+            e.printStackTrace();
         }
 
         return returnDate;

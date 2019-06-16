@@ -1,7 +1,6 @@
 package pl.nogacz.cognifide.library;
 
 import com.google.gson.Gson;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import pl.nogacz.cognifide.google.BooksAPI;
 import pl.nogacz.cognifide.library.dto.RatingDTO;
