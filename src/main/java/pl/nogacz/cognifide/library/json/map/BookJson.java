@@ -47,13 +47,12 @@ public class BookJson {
     }
 
     private Book createBook(Items item) {
-        DateToLong dateToLong = new DateToLong();
-
         VolumeInfo volumeInfo = item.getVolumeInfo();
 
         Long publishedDate = null;
 
         if(volumeInfo.getPublishedDate() != null) {
+            DateToLong dateToLong = new DateToLong();
             publishedDate = dateToLong.convert(volumeInfo.getPublishedDate());
         }
 
