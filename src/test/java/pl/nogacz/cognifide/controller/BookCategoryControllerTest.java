@@ -36,6 +36,9 @@ public class BookCategoryControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private Gson gson;
+
     @Test
     public void getBooksFromCategory() {
         //Given
@@ -57,8 +60,8 @@ public class BookCategoryControllerTest {
         Mockito.when(library.getBooksFromCategory("test")).thenReturn(bookSet);
 
         //Then
-        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getBookFromCategory/test", String.class))
-                .contains(new Gson().toJson(bookSet));
+        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/bookFromCategory/test", String.class))
+                .contains(gson.toJson(bookSet));
     }
 
     @Test
@@ -70,7 +73,7 @@ public class BookCategoryControllerTest {
         Mockito.when(library.getBooksFromCategory("test")).thenReturn(bookSet);
 
         //Then
-        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getBookFromCategory/test", String.class))
+        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/bookFromCategory/test", String.class))
                 .contains("\"status\":404");
     }
 
@@ -87,8 +90,8 @@ public class BookCategoryControllerTest {
         Mockito.when(library.getCategory()).thenReturn(category);
 
         //Then
-        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getCategory", String.class))
-                .contains(new Gson().toJson(category));
+        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/category", String.class))
+                .contains(gson.toJson(category));
     }
 
     @Test
@@ -100,7 +103,7 @@ public class BookCategoryControllerTest {
         Mockito.when(library.getCategory()).thenReturn(category);
 
         //Then
-        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/getCategory", String.class))
+        assertThat(this.restTemplate.getForObject(LOCALHOST + port + "/category", String.class))
                 .contains("\"status\":404");
     }
 }

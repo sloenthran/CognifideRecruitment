@@ -20,7 +20,7 @@ public class BookCategoryController {
     @Autowired
     private Library library;
 
-    @GetMapping(value = "/getBookFromCategory/{category}", produces = "application/json")
+    @GetMapping(value = "/bookFromCategory/{category}", produces = "application/json")
     public ResponseEntity<String> getBooksFromCategory(@PathVariable("category") String category) {
         Set<Book> bookSet = library.getBooksFromCategory(category);
 
@@ -33,7 +33,7 @@ public class BookCategoryController {
         }
     }
 
-    @GetMapping(value = "/getCategory", produces = "application/json")
+    @GetMapping(value = "/category", produces = "application/json")
     public ResponseEntity<String> getCategory() {
         Set<String> category = library.getCategory();
 

@@ -20,7 +20,7 @@ public class BookDetailsController {
     @Autowired
     private Library library;
 
-    @GetMapping(value = "/getBook/{id}", produces = "application/json")
+    @GetMapping(value = "/book/{id}", produces = "application/json")
     public ResponseEntity<String> getBook(@PathVariable("id") String id) {
         Book book = library.getBook(id);
 
@@ -33,7 +33,7 @@ public class BookDetailsController {
         }
     }
 
-    @GetMapping(value = "/getBooks", produces = "application/json")
+    @GetMapping(value = "/books", produces = "application/json")
     public ResponseEntity<String> getBooks() {
         Set<Book> books = library.getBooks();
 
